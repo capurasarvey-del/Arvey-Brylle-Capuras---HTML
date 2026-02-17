@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arvey Brylle Capuras Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.4);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1100;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav-links li a:hover, .nav-links li a.active-link {
+            color: #ffcc33;
+            border-bottom: 2px solid #ffcc33;
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 950px;
+            min-height: 450px;
+            padding: 40px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 40px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .content-section {
+            display: none;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            text-align: center;
+        }
+
+        .content-section.active {
+            display: flex;
+        }
+
+        .profile-img {
+            width: 220px;
+            height: 280px;
+            border-radius: 15px;
+            object-fit: cover;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .text-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .name {
+            font-size: clamp(1.5rem, 5vw, 2.1rem);
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .glass-inner {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+        }
+
+        .description {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .explore-btn {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 12px 35px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .explore-btn:hover {
+            background: #ffcc33;
+            color: #000;
+        }
+
+        .bullet-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .bullet-list li {
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 4%;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                right: -100%;
+                top: 0;
+                flex-direction: column;
+                background: rgba(15, 32, 39, 0.98);
+                width: 75%;
+                height: 100vh;
+                justify-content: center;
+                text-align: center;
+                transition: 0.4s ease-in-out;
+                padding: 20px 0;
+                box-shadow: -5px 0 20px rgba(0,0,0,0.6);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .nav-links li a {
+                font-size: 1.2rem;
+            }
+
+            .content-card {
+                flex-direction: column;
+                padding: 30px 20px;
+                margin-top: 20px;
+            }
+
+            .content-section {
+                flex-direction: column;
+            }
+
+            .profile-img {
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">My Portfolio</div>
+        
+        <div class="hamburger" id="hamburgerBtn" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav>
+            <ul class="nav-links" id="navLinks">
+                <li><a onclick="showSection('home')" id="l-home" class="active-link">Home</a></li>
+                <li><a onclick="showSection('about')" id="l-about">About</a></li>
+                <li><a onclick="showSection('objective')" id="l-objective">Objective</a></li>
+                <li><a onclick="showSection('skills')" id="l-skills">Skills</a></li>
+                <li><a onclick="showSection('projects')" id="l-projects">Projects</a></li>
+                <li><a onclick="showSection('contact')" id="l-contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="content-card">
+            <section id="home" class="content-section active">
+                <img src="ar.jpg" alt="Arvey Brylle" class="profile-img">
+                <div class="text-content">
+                    <h1 class="name">ARVEY BRYLLE CAPURAS</h1>
+                    <div class="glass-inner">
+                        <p class="description">A BSIT student focused on developing clean, user-friendly websites and innovative web applications.</p>
+                    </div>
+                    <a onclick="showSection('about')" class="explore-btn">Explore</a>
+                </div>
+            </section>
+
+            <section id="about" class="content-section">
+                <div class="text-content">
+                    <h1 class="name">Personal Information</h1>
+                    <div class="glass-inner">
+                        <p class="description">
+                            <b>Full Name:</b> Arvey Brylle Capuras<br>
+                            <b>Course:</b> BS Information Technology<br>
+                            <b>Year:</b> 3rd Year Student
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="objective" class="content-section">
+                <div class="text-content">
+                    <h1 class="name">Career Objective</h1>
+                    <div class="glass-inner">
+                        <p class="description">To build a successful career in IT by developing innovative solutions and continuously enhancing my technical skills.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="skills" class="content-section">
+                <div class="text-content">
+                    <h1 class="name">Technical Skills</h1>
+                    <div class="glass-inner">
+                        <ul class="bullet-list">
+                            <li>✦ HTML & CSS</li>
+                            <li>✦ Mobile App Dev</li>
+                            <li>✦ UI/UX Design</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="projects" class="content-section">
+                <div class="text-content">
+                    <h1 class="name">Projects</h1>
+                    <div class="glass-inner">
+                        <ul class="bullet-list">
+                            <li>✦ Portfolio Website</li>
+                            <li>✦ Student Management System</li>
+                            <li>✦ E-Commerce UI</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="content-section">
+                <div class="text-content">
+                    <h1 class="name">Contact Me</h1>
+                    <div class="glass-inner">
+                        <p class="description">
+                            <b>Email:</b> capurasarveybrylle@gmail.com<br>
+                            <b>GitHub:</b> github.com/capurasarveybrylle<br>
+                            <b>Phone:</b> 09536773239
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            nav.classList.toggle('active');
+        }
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active-link');
+            });
+            const activeLink = document.getElementById('l-' + sectionId);
+            if(activeLink) activeLink.classList.add('active-link');
+
+            const nav = document.getElementById('navLinks');
+            nav.classList.remove('active');
+        }
+    </script>
+</body>
+</html>
